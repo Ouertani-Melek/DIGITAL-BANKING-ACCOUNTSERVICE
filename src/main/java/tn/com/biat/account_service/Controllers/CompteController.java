@@ -1,17 +1,56 @@
 package tn.com.biat.account_service.Controllers;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import tn.com.biat.account_service.models.Compte;
+import tn.com.biat.account_service.models.User;
+import tn.com.biat.account_service.repositories.CompteRepository;
+import tn.com.biat.account_service.repositories.UserRepository;
+
+import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class CompteController {
 
+    @Autowired
+    CompteRepository compteRepository;
+    @Autowired
+    UserRepository userRepository;
+
     @RequestMapping(value = "/helloTest" , method = RequestMethod.GET)
     public String testGreetings() {
         return "Hello";
+    }
+
+    @RequestMapping(value = "/getuser" , method = RequestMethod.GET)
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+
+
+    @RequestMapping(value = "/account/{id}",method = RequestMethod.PUT)
+    public void assignAccountToUser(@PathVariable("id") String id, @Valid @RequestBody Compte compte)
+    {
+
+        User user =  userRepository.findById(id).get();
+
+
+        if(user.getComptes()==null){
+        user.setComptes(new HashSet<>());
+        user.getComptes().add(compte);
+        }
+        else
+            user.getComptes().add(compte);
+
+
+        compteRepository.save(compte);
+        userRepository.save(user);
+
     }
 
 }
