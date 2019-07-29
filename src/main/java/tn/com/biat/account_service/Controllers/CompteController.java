@@ -26,13 +26,19 @@ public class CompteController {
         return "Hello";
     }
 
-    @RequestMapping(value = "/getuser" , method = RequestMethod.GET)
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    @RequestMapping(value = "/accounts" , method = RequestMethod.GET)
+    public List<Compte> getAllAccounts() {
+        return compteRepository.findAll();
     }
 
 
-
+    @RequestMapping(value = "/account",method = RequestMethod.POST)
+    public void createAccount(@Valid @RequestBody Compte compte)
+    {
+        compte.setEnabled(true);
+        compte.setEtat_du_compte(false);
+        compteRepository.save(compte);
+    }
     @RequestMapping(value = "/account/{id}",method = RequestMethod.PUT)
     public void assignAccountToUser(@PathVariable("id") String id, @Valid @RequestBody Compte compte)
     {

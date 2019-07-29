@@ -19,6 +19,8 @@ public class Compte {
     private String nomJF;
     private String email;
     private String code_client;
+    private String gender;
+    private String credit_immediat;
 
     //Coordonnées
     private String pays;
@@ -32,7 +34,7 @@ public class Compte {
     - Logement de fonction
     - Hébergé(e) par un tiers
     */
-    private String situation;
+    private String situationDomicile;
 
 
 
@@ -92,11 +94,17 @@ public class Compte {
 
     private String type_service ;
 
+    private String type_carte;
+
 
     //Documents
     private String copie_CIN;
     private String fiche_paie;
     private String facture;
+
+    //Etat du compte
+    private Boolean etat_du_compte;
+    private boolean enabled;
 
 
     public String getId() {
@@ -185,14 +193,6 @@ public class Compte {
 
     public void setTel_domicile(String tel_domicile) {
         this.tel_domicile = tel_domicile;
-    }
-
-    public String getSituation() {
-        return situation;
-    }
-
-    public void setSituation(String situation) {
-        this.situation = situation;
     }
 
     public Date getDate_naissance() {
@@ -362,4 +362,28 @@ public class Compte {
     public void setFacture(String facture) {
         this.facture = facture;
     }
+
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) { this.gender = gender; }
+
+    public String getCredit_immediat() { return credit_immediat; }
+
+    public void setCredit_immediat(String credit_immediat) { this.credit_immediat = credit_immediat; }
+
+    public String getSituationDomicile() { return situationDomicile; }
+
+    public void setSituationDomicile(String situationDomicile) { this.situationDomicile = situationDomicile; }
+
+    public String getType_carte() { return type_carte; }
+
+    public void setType_carte(String type_carte) { this.type_carte = type_carte; }
+
+    public Boolean getEtat_du_compte() { return etat_du_compte; }
+
+    public void setEtat_du_compte(Boolean etat_du_compte){ this.etat_du_compte = etat_du_compte; }
+
+    public boolean isEnabled() { return enabled; }
+
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 }
