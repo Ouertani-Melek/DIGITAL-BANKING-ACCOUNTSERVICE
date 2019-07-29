@@ -103,7 +103,7 @@ public class Compte {
     private String facture;
 
     //Etat du compte
-    private Boolean etat_du_compte;
+    private String etat_du_compte;
     private boolean enabled;
 
 
@@ -379,9 +379,9 @@ public class Compte {
 
     public void setType_carte(String type_carte) { this.type_carte = type_carte; }
 
-    public Boolean getEtat_du_compte() { return etat_du_compte; }
+    public String getEtat_du_compte() { return etat_du_compte; }
 
-    public void setEtat_du_compte(Boolean etat_du_compte){ this.etat_du_compte = etat_du_compte; }
+    public void setEtat_du_compte(String etat_du_compte) { this.etat_du_compte = etat_du_compte; }
 
     public boolean isEnabled() { return enabled; }
 

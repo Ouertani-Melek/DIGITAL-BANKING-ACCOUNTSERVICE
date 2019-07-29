@@ -36,9 +36,26 @@ public class CompteController {
     public void createAccount(@Valid @RequestBody Compte compte)
     {
         compte.setEnabled(true);
-        compte.setEtat_du_compte(false);
+        compte.setEtat_du_compte("pending");
         compteRepository.save(compte);
     }
+
+    @RequestMapping(value = "/account/ban/{id}", method = RequestMethod.PUT)
+    public void terminateAccount(@PathVariable("id") String id) {
+        Compte compte = compteRepository.findById(id).get();
+        compte.setId(id);
+        compte.setEnabled(false);
+        compteRepository.save(compte);
+    }
+
+    @RequestMapping(value = "/account/{id}/{etat_du_compte}", method = RequestMethod.PUT)
+    public void handleAccount(@PathVariable("id") String id, @PathVariable("etat_du_compte") String etat) {
+        Compte compte = compteRepository.findById(id).get();
+        compte.setId(id);
+       compte.setEtat_du_compte(etat);
+        compteRepository.save(compte);
+    }
+
     @RequestMapping(value = "/account/{id}",method = RequestMethod.PUT)
     public void assignAccountToUser(@PathVariable("id") String id, @Valid @RequestBody Compte compte)
     {
