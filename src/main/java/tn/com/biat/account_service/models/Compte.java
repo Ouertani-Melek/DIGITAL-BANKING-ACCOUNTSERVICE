@@ -73,6 +73,7 @@ public class Compte {
     private float chiffre_affaire;
     private int nbr_salaries;
     private float payes_activite;
+    private String nomEntreprise;
 
 
     //Alimentatioon du compte
