@@ -32,7 +32,13 @@ public class CompteController {
     }
 
 
-    @RequestMapping(value = "/account",method = RequestMethod.POST)
+    @RequestMapping(value = "/accounts/simpleUser/{email}" , method = RequestMethod.GET)
+    public List<Compte> getAllAccountsByEmail(@PathVariable("email") String email) {
+        return compteRepository.findByEmail(email);
+    }
+
+
+    @RequestMapping(value = "/accounts/simpleUser",method = RequestMethod.POST)
     public void createAccount(@Valid @RequestBody Compte compte)
     {
         compte.setEnabled(true);
@@ -59,21 +65,15 @@ public class CompteController {
     @RequestMapping(value = "/account/{id}",method = RequestMethod.PUT)
     public void assignAccountToUser(@PathVariable("id") String id, @Valid @RequestBody Compte compte)
     {
-
         User user =  userRepository.findById(id).get();
-
-
         if(user.getComptes()==null){
         user.setComptes(new HashSet<>());
         user.getComptes().add(compte);
         }
         else
             user.getComptes().add(compte);
-
-
         compteRepository.save(compte);
         userRepository.save(user);
-
     }
 
 }
